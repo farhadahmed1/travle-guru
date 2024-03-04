@@ -14,6 +14,7 @@ const Navbar = () => {
       <li className="ml-2  mb-2">
         <NavLink to="/blog">Blog</NavLink>
       </li>
+
       <li className="ml-2  mb-2">
         <NavLink to="/contact">Contact</NavLink>
       </li>

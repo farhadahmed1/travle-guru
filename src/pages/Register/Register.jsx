@@ -1,35 +1,46 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import { useContext } from "react";
 
-const Login = () => {
-  const { loginUser } = useContext(AuthContext);
-
-  const handelLogin = (e) => {
+const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const handleRegister = (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    // console.log(email, password);
+    console.log(name, email, password);
 
-    loginUser(email, password)
+    // create user in firebase
+    createUser(name, email, password)
       .then((result) => {
         console.log(result.user);
         e.target.reset();
-        // navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   return (
     <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col">
+      <div className="hero-content flex-col ">
         <div className="text-center ">
-          <h1 className="text-5xl font-bold py-4">Login now!</h1>
+          <h1 className="text-5xl font-bold py-4">Register now!</h1>
         </div>
         <div className="card shrink-0  w-96 max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handelLogin} className="card-body">
+          <form onSubmit={handleRegister} className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                className="input input-bordered"
+                required
+              />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -37,8 +48,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
-                id="email"
-                placeholder="Enter your email"
+                placeholder="Enter your  email"
                 className="input input-bordered"
                 required
               />
@@ -50,7 +60,6 @@ const Login = () => {
               <input
                 type="password"
                 name="password"
-                id="password"
                 placeholder="Enter your password"
                 className="input input-bordered"
                 required
@@ -62,16 +71,13 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Google</button>
+              <button className="btn btn-primary">Register</button>
             </div>
           </form>
           <p className="mb-6 text-center">
-            New to this website?
-            <Link className="text-green-600 ml-1/2" to="/register">
-              Register
+            Already have an account ?
+            <Link className="text-green-600 ml-1/2" to="/login">
+              Login
             </Link>
           </p>
         </div>
@@ -80,4 +86,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
