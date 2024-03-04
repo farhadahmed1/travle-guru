@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import app from "./../firebase/firebase.config";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
@@ -15,6 +15,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
   // create a new user
   const createUser = (email, password) => {
     setLoading(true);
